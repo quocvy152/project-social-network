@@ -24,6 +24,12 @@ app.get('/', (req, res) => {
     res.redirect('/user/login');
 });
 
+app.get('*', (req, res) => {
+    res.json({
+        message: 'Hello Everybody'
+    });
+});
+
 mongoose.connect(URI_MONGOOSE, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
     app.listen(`${PORT}`, () => console.log(`Server start at port ${PORT}`))
