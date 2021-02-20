@@ -26,7 +26,8 @@ app.get('/', (req, res) => {
 
 app.get('*', (req, res) => {
     res.json({
-        message: 'Hello Everybody'
+        message: 'Hello Everybody',
+        error: false
     });
 });
 
