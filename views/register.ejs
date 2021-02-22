@@ -135,16 +135,18 @@
                                                                 </div>
                                                             </div>
                                                             <button type="submit" data-ripple="">Register</button>
-                                                            <a class="forgot underline" href="#" title="">forgot
-                                                                password?</a>
+                                                            <a class="forgot underline" href="#" title="">forgot password?</a>
                                                             <% if(errorRegister) { %>
-                                                                <div class="alert alert-danger" role="alert"
-                                                                    style="margin-top: 15px; color: red;">
+                                                                <div class="alert alert-danger" role="alert" style="margin-top: 15px; color: red;">
                                                                     <%= errorRegister %>
                                                                 </div>
-                                                                <% } else { %>
-                                                                    <div class=""></div>
-                                                                    <% } %>
+                                                            <% } else if (regSuccess) { %>
+                                                                <div class="alert alert-success" role="alert" style="margin-top: 15px">
+                                                                    Đăng kí thành công. Vui lòng chuyển sang đăng nhập!
+                                                                </div>
+                                                            <% } else { %>
+                                                                <div></div>
+                                                            <% } %>
                                 </form>
                                 <a data-ripple="" title="" href="#" class="with-smedia facebook"><i
                                         class="fa fa-facebook"></i></a>

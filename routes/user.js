@@ -11,7 +11,7 @@ const router = express.Router();
  */
 router.route('/register')
     .get((req, res) => {
-        res.render('register', { errorRegister: undefined, email: undefined, password: undefined, phone: undefined });
+        res.render('register', { errorRegister: undefined, email: undefined, password: undefined, phone: undefined, regSuccess: null });
     })
     .post(async (req, res) => {
         try {
@@ -25,15 +25,17 @@ router.route('/register')
 
             errorRegister = await USER.checkAllErrorRegister(email, password, phone, birthdayDate, birthdayMonth, birthdayYear);
                 
-            if(errorRegister) return res.render('register', { errorRegister, email, password, phone });
+            if(errorRegister) return res.render('register', { errorRegister, email, password, phone, regSuccess: null });
 
             let birthdayOfUser = new Date(USER.validStrBirthday(birthdayDate, birthdayMonth, birthdayYear));
             let newUser = new USER_COLL({ email, password: passHash, phone, birthDay: birthdayOfUser });
 
             let infoUserSave = await newUser.save(); 
-            if(!infoUserSave) res.json({ error: true, message: 'CANNOT_SAVE_USER' });
-
-            res.redirect('/user/login');
+            if(!infoUserSave) {
+                res.json({ error: true, message: 'CANNOT_SAVE_USER' });
+            } else {
+                return res.render('register', { errorRegister: null, email: null, password: null, phone: null, regSuccess: infoUserSave });
+            }
         } catch (error) {
             return res.json({ error: true, message: error.message });
         }
