@@ -19,6 +19,7 @@ router.route('/register')
 
             // tạo một biến thông báo lỗi chung, kiểm tra và thông báo lỗi từ từ thông qua biến này (mỗi thời điểm chỉ thông báo 1 lỗi)
             let errorRegister = null;
+            let errorAll = null;
             
             let passHash = await hash(password, 8);
             if(!passHash) res.json({ error: true, message: 'CANNOT_HASH_PASH' });
