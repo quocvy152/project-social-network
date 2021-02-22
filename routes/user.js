@@ -11,7 +11,7 @@ const router = express.Router();
  */
 router.route('/register')
     .get((req, res) => {
-        res.render('register', { errorRegister: undefined, email: undefined, password: undefined, phone: undefined, regSuccess: null });
+        res.render('register', { errorRegister: undefined, infoUser: {}, regSuccess: null });
     })
     .post(async (req, res) => {
         try {
@@ -24,8 +24,10 @@ router.route('/register')
             if(!passHash) res.json({ error: true, message: 'CANNOT_HASH_PASH' });
 
             errorRegister = await USER.checkAllErrorRegister(email, password, phone, birthdayDate, birthdayMonth, birthdayYear);
-                
-            if(errorRegister) return res.render('register', { errorRegister, email, password, phone, regSuccess: null });
+            
+            // tạo biến infoUser để rút gọn biến gửi đi để render
+            let infoUser = { email, password, phone };
+            if(errorRegister) return res.render('register', { errorRegister, infoUser, regSuccess: null });
 
             let birthdayOfUser = new Date(USER.validStrBirthday(birthdayDate, birthdayMonth, birthdayYear));
             let newUser = new USER_COLL({ email, password: passHash, phone, birthDay: birthdayOfUser });
@@ -34,7 +36,7 @@ router.route('/register')
             if(!infoUserSave) {
                 res.json({ error: true, message: 'CANNOT_SAVE_USER' });
             } else {
-                return res.render('register', { errorRegister: null, email: null, password: null, phone: null, regSuccess: infoUserSave });
+                return res.render('register', { errorRegister: null, infoUser: {}, regSuccess: infoUserSave });
             }
         } catch (error) {
             return res.json({ error: true, message: error.message });
@@ -43,17 +45,18 @@ router.route('/register')
 
 router.route('/login')
     .get((req, res) => {
-        res.render('login', { errorLogin: undefined, email: undefined, password: undefined });
+        res.render('login', { errorLogin: undefined, infoUser: {} });
     })
     .post(async (req, res) => {
         try {
             const { email, password } = req.body;
             
             let errorLogin = null;
+            let infoUser = { email, password };
 
             errorLogin = await USER.checkAllErrorLogin(email, password);
             if(errorLogin) {
-                res.render('login', { errorLogin, email, password });
+                res.render('login', { errorLogin, infoUser });
             }
 
             res.redirect(`/user/${email}`);

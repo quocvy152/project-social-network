@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="../css/main.min.css">
-	<link rel="stylesheet" type="text/css" href="../css/weather-icon.css">
+	<link rel="stylesheet" type="text/css" href="../css/weather-icon.css"
 	<link rel="stylesheet" type="text/css" href="../css/weather-icons.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" type="text/css" href="../css/color.css">
@@ -80,13 +80,13 @@
                                 </div>
                                 <form class="we-form" method="POST" action="/user/login">
                                     <input id="email" name="email" type="email" placeholder="Email"
-                                        <% if(email) { %>
-                                            value=<%= email %> 
+                                        <% if(infoUser.email) { %>
+                                            value=<%= infoUser.email %> 
                                         <% } %>
                                     >
                                     <input id="password" name="password" type="password" placeholder="Password"
-                                        <% if(password) { %>
-                                            value=<%= password %> 
+                                        <% if(infoUser.password) { %>
+                                            value=<%= infoUser.password %> 
                                         <% } %>
                                     >
                                     <input type="checkbox"><label>remember me</label>

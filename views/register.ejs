@@ -59,18 +59,18 @@
                                     <span>Sign Up now and meet the awesome friends around the world.</span>
                                 </div>
                                 <form class="we-form" method="POST" action="/user/register">
-                                    <input id="email" name="email" type="email" placeholder="Email" <% if(email) { %>
-                                    value=<%= email %>
+                                    <input id="email" name="email" type="email" placeholder="Email" <% if(infoUser.email) { %>
+                                    value=<%= infoUser.email %>
                                         <% } %>
                                             >
                                             <input id="password" name="password" type="password" placeholder="Password"
-                                                <% if(password) { %>
-                                            value=<%= password %>
+                                                <% if(infoUser.password) { %>
+                                            value=<%= infoUser.password %>
                                                 <% } %>
                                                     >
                                                     <input id="phone" name="phone" type="text"
-                                                        placeholder="+1234-567-987" <% if(phone) { %>
-                                                    value=<%= phone %>
+                                                        placeholder="+1234-567-987" <% if(infoUser.phone) { %>
+                                                    value=<%= infoUser.phone %>
                                                         <% } %>
                                                             >
                                                             <div class="_58mq _5dbb" id="birthday_wrapper">
