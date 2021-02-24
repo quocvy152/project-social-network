@@ -9,9 +9,10 @@ const PORT = process.env.PORT || 3000;
 const URI_MONGOOSE = 'mongodb://localhost:27017/project-mxh';
 
 const { USER_ROUTE } = require('./routes/user');
+const { USER_COLL } = require('./models/user-coll');
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.use(express.static('public'));
 
@@ -24,7 +25,20 @@ app.get('/', (req, res) => {
     res.redirect('/user/login');
 });
 
-mongoose.connect(URI_MONGOOSE, { useNewUrlParser: true, useUnifiedTopology: true });
+app.get('/logout/:email', async (req, res) => {
+    let { email } = req.params;
+
+    let infoUser = await USER_COLL.findOne({ email });
+    if(!infoUser) res.json({ error: true, message: "CANNOT_FIND_USER" });
+
+    res.render('logout', { infoUser });
+});
+
+mongoose.connect(URI_MONGOOSE, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+});
+
 mongoose.connection.once('open', () => {
     app.listen(`${PORT}`, () => console.log(`Server start at port ${PORT}`))
 });

@@ -59,94 +59,103 @@
                                     <span>Sign Up now and meet the awesome friends around the world.</span>
                                 </div>
                                 <form class="we-form" method="POST" action="/user/register">
+                                    <input id="username" name="username" type="username" placeholder="Username" <% if(infoUser.username) { %>
+                                        value="<%= infoUser.username %>"
+                                            <% } %>
+                                                >
                                     <input id="email" name="email" type="email" placeholder="Email" <% if(infoUser.email) { %>
                                     value=<%= infoUser.email %>
                                         <% } %>
                                             >
-                                            <input id="password" name="password" type="password" placeholder="Password"
-                                                <% if(infoUser.password) { %>
-                                            value=<%= infoUser.password %>
-                                                <% } %>
-                                                    >
-                                                    <input id="phone" name="phone" type="text"
-                                                        placeholder="+1234-567-987" <% if(infoUser.phone) { %>
-                                                    value=<%= infoUser.phone %>
-                                                        <% } %>
-                                                            >
-                                                            <div class="_58mq _5dbb" id="birthday_wrapper">
-                                                                <div class="mtm mbs _2_68">Ngày sinh<a class="_58ms mlm"
-                                                                        id="birthday-help" href="#"
-                                                                        title="Nhấp chuột để biết thêm thông tin"
-                                                                        role="button"><i
-                                                                            class="img sp_7UFqTAR_cIA_1_5x sx_775b52"></i></a>
-                                                                </div>
-                                                                <div class="_5k_5"><span class="_5k_4"
-                                                                        data-type="selectors"
-                                                                        data-name="birthday_wrapper"
-                                                                        id="u_2_l"><span><select aria-label="Ngày"
-                                                                                name="birthdayDate" id="date"
-                                                                                title="Ngày"
-                                                                                class="_9407 _5dba _9hk6 _8esg">
-                                                                                <% let currentDate = new Date().getDate(); %>
-                                                                                <% for(let i = 1; i < 32; i++) { %>
-                                                                                    <% if(i === currentDate) { %>
-                                                                                        <option value="<%= i %>" selected="1">
-                                                                                            <%= i %>
-                                                                                        </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>"">
-                                                                                            <%= i %>
-                                                                                        </option>
-                                                                                    <% }} %>
-                                                                            </select><select aria-label="Tháng"
-                                                                                name="birthdayMonth" id="month"
-                                                                                title="Tháng"
-                                                                                class="_9407 _5dba _9hk6 _8esg">
-                                                                                <% let currentMonth = new Date().getMonth() + 1; %>
-                                                                                <% for(let i = 1; i < 13; i++) { %>
-                                                                                    <% if(i === currentMonth) { %>
-                                                                                        <option value="<%= i %>" selected="1">
-                                                                                            <%= `Tháng ${i}` %>
-                                                                                        </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>"">
-                                                                                            <%= `Tháng ${i}` %>
-                                                                                        </option>
-                                                                                    <% }} %>
-                                                                            </select><select aria-label="Năm"
-                                                                                name="birthdayYear" id="year"
-                                                                                title="Năm"
-                                                                                class="_9407 _5dba _9hk6 _8esg">
-                                                                                <% let currentYear = new Date().getFullYear(); %>
-                                                                                <% for(let i = currentYear; i > 1904; i--) { %>
-                                                                                    <% if(i === currentYear) { %>
-                                                                                        <option value="<%= i %>" selected="1">
-                                                                                            <%= i %>
-                                                                                        </option>
-                                                                                    <% } else { %>
-                                                                                        <option value="<%= i %>"">
-                                                                                            <%= i %>
-                                                                                        </option>
-                                                                                    <% }} %>
-                                                                            </select></span></span><i
-                                                                        class="_5dbc _5k_6 img sp_DsFT2tc46le_1_5x sx_692903"></i><i
-                                                                        class="_5dbd _5k_7 img sp_DsFT2tc46le_1_5x sx_ba75b4"></i>
-                                                                    <div class="_1pc_"></div>
-                                                                </div>
-                                                            </div>
-                                                            <button type="submit" data-ripple="">Register</button>
-                                                            <a class="forgot underline" href="#" title="">forgot password?</a>
-                                                            <% if(errorRegister) { %>
-                                                                <div class="alert alert-danger" role="alert" style="margin-top: 15px; color: red;">
-                                                                    <%= errorRegister %>
-                                                                </div>
-                                                            <% } else if (regSuccess) { %>
-                                                                <div class="alert alert-success" role="alert" style="margin-top: 15px">
-                                                                    Đăng kí thành công. Vui lòng chuyển sang đăng nhập!
-                                                                </div>
-                                                            <% } else { %>
-                                                                <div></div>
-                                                            <% } %>
+                                    <input id="password" name="password" type="password" placeholder="Password"
+                                        <% if(infoUser.password) { %>
+                                    value=<%= infoUser.password %>
+                                        <% } %>
+                                            >
+                                    <input id="confirmPass" name="confirmPass" type="password"
+                                        placeholder="Confirm password" <% if(infoUser.confirmPass) { %>
+                                    value=<%= infoUser.confirmPass %>
+                                        <% } %>
+                                            >
+                                    <input id="phone" name="phone" type="text"
+                                        placeholder="+1234-567-987" <% if(infoUser.phone) { %>
+                                    value=<%= infoUser.phone %>
+                                        <% } %>
+                                            >
+                                            <div class="_58mq _5dbb" id="birthday_wrapper">
+                                                <div class="mtm mbs _2_68">Ngày sinh<a class="_58ms mlm"
+                                                        id="birthday-help" href="#"
+                                                        title="Nhấp chuột để biết thêm thông tin"
+                                                        role="button"><i
+                                                            class="img sp_7UFqTAR_cIA_1_5x sx_775b52"></i></a>
+                                                </div>
+                                                <div class="_5k_5"><span class="_5k_4"
+                                                        data-type="selectors"
+                                                        data-name="birthday_wrapper"
+                                                        id="u_2_l"><span><select aria-label="Ngày"
+                                                                name="birthdayDate" id="date"
+                                                                title="Ngày"
+                                                                class="_9407 _5dba _9hk6 _8esg">
+                                                                <% let currentDate = new Date().getDate(); %>
+                                                                <% for(let i = 1; i < 32; i++) { %>
+                                                                    <% if(i === currentDate) { %>
+                                                                        <option value="<%= i %>" selected="1">
+                                                                            <%= i %>
+                                                                        </option>
+                                                                    <% } else { %>
+                                                                        <option value="<%= i %>"">
+                                                                            <%= i %>
+                                                                        </option>
+                                                                    <% }} %>
+                                                            </select><select aria-label="Tháng"
+                                                                name="birthdayMonth" id="month"
+                                                                title="Tháng"
+                                                                class="_9407 _5dba _9hk6 _8esg">
+                                                                <% let currentMonth = new Date().getMonth() + 1; %>
+                                                                <% for(let i = 1; i < 13; i++) { %>
+                                                                    <% if(i === currentMonth) { %>
+                                                                        <option value="<%= i %>" selected="1">
+                                                                            <%= `Tháng ${i}` %>
+                                                                        </option>
+                                                                    <% } else { %>
+                                                                        <option value="<%= i %>"">
+                                                                            <%= `Tháng ${i}` %>
+                                                                        </option>
+                                                                    <% }} %>
+                                                            </select><select aria-label="Năm"
+                                                                name="birthdayYear" id="year"
+                                                                title="Năm"
+                                                                class="_9407 _5dba _9hk6 _8esg">
+                                                                <% let currentYear = new Date().getFullYear(); %>
+                                                                <% for(let i = currentYear; i > 1904; i--) { %>
+                                                                    <% if(i === currentYear) { %>
+                                                                        <option value="<%= i %>" selected="1">
+                                                                            <%= i %>
+                                                                        </option>
+                                                                    <% } else { %>
+                                                                        <option value="<%= i %>"">
+                                                                            <%= i %>
+                                                                        </option>
+                                                                    <% }} %>
+                                                            </select></span></span><i
+                                                        class="_5dbc _5k_6 img sp_DsFT2tc46le_1_5x sx_692903"></i><i
+                                                        class="_5dbd _5k_7 img sp_DsFT2tc46le_1_5x sx_ba75b4"></i>
+                                                    <div class="_1pc_"></div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" data-ripple="">Register</button>
+                                            <a class="forgot underline" href="#" title="">forgot password?</a>
+                                            <% if(errorRegister) { %>
+                                                <div class="alert alert-danger" role="alert" style="margin-top: 15px; color: red;">
+                                                    <%= errorRegister %>
+                                                </div>
+                                            <% } else if (regSuccess) { %>
+                                                <div class="alert alert-success" role="alert" style="margin-top: 15px">
+                                                    Đăng kí thành công. Vui lòng chuyển sang đăng nhập!
+                                                </div>
+                                            <% } else { %>
+                                                <div></div>
+                                            <% } %>
                                 </form>
                                 <a data-ripple="" title="" href="#" class="with-smedia facebook"><i
                                         class="fa fa-facebook"></i></a>

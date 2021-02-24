@@ -38,14 +38,14 @@ let validStrBirthday = (birthdayDate, birthdayMonth, birthdayYear) => {
     return birthdayYear + '-' + birthdayMonth + '-' + birthdayDate;
 }
 
-let checkAllErrorRegister = async (email, password, phone, birthdayDate, birthdayMonth, birthdayYear) => {
+let checkAllErrorRegister = async (email, password, confirmPass, username, phone, birthdayDate, birthdayMonth, birthdayYear) => {
     let isExistEmail = await USER_COLL.findOne({ email });
     let isExistPhone = await USER_COLL.findOne({ phone });
     let birthdayOfUser = new Date(validStrBirthday(birthdayDate, birthdayMonth, birthdayYear));
     let currentDay = new Date();
 
     // hàm kiểm tra giá trị có null hay không
-    if(!email || !password || !phone) return "Vui lòng không được bỏ trống";
+    if(!username || !email || !password || !phone || !password) return "Vui lòng điền đầy đủ hết tất cả các ô";
 
     // hàm kiểm tra email đã tồn tại chưa
     else if(isExistEmail) return "Email đã tồn tại";
@@ -55,6 +55,8 @@ let checkAllErrorRegister = async (email, password, phone, birthdayDate, birthda
      */
     else if(password.length < 7 || password.length > 20) return "Độ dài mật khẩu phải lớn hơn 7 và nhỏ hơn 20 kí tự";
     
+    else if(password !== confirmPass) return "Mật khẩu xác nhận không đúng";
+
     else if(!isPassWithValidChar(password)) return "Mật khẩu phải bao gồm 1 kí tự hoa, thường, chữ số và kí tự đặc biệt";
     
     /**
@@ -82,8 +84,18 @@ let checkAllErrorLogin = async (email, password) => {
     return null;
 }
 
+let removeSpace = (username) => {
+    username = username.toString();
+    username = username.trim();
+    while(username.includes('  ')) {
+        username = username.replace('  ', ' ');
+    }
+    return username;
+}
+
 exports.USER = {
     checkAllErrorRegister, 
     checkAllErrorLogin,
-    validStrBirthday
+    validStrBirthday, 
+    removeSpace
 };

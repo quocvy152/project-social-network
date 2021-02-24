@@ -776,7 +776,7 @@
 						<li><a href="setting.html" title=""><i class="ti-pencil-alt"></i>edit profile</a></li>
 						<li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>
 						<li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>
-						<li><a href="logout.html" title=""><i class="ti-power-off"></i>log out</a></li>
+						<li><a href="/logout/<%= infoUser.email %>" title=""><i class="fa fa-sign-out"></i>log out</a></li>
 					</ul>
 				</div>
 			</div>
@@ -1297,7 +1297,7 @@
 												</div>
 													
 												<div class="author-content">
-													<a class="h4 author-name" href="about.html"><%= infoUser.email %></a>
+													<a class="h4 author-name" href="about.html"><%= infoUser.username %></a>
 													<div class="country">Ontario, CA</div>
 												</div>
 											</div>

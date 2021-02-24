@@ -5,6 +5,7 @@ const { Schema }   = mongoose;
 const userSchema = new Schema({
     email   : { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true },
+    username: { type: String, required: true, trim: true },
     phone   : { type: String, required: true },
     /**
      * Danh sách bạn của User
