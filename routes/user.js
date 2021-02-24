@@ -26,8 +26,7 @@ router.route('/register')
             if(!passHash) res.json({ error: true, message: 'CANNOT_HASH_PASH' });
             
             // tạo biến infoUser để rút gọn biến gửi đi để render
-            let infoUser = { email, password, confirmPass, username, phone };
-            if(errorRegister) return res.render('register', { errorRegister, infoUser, regSuccess: null });
+            if(errorRegister) return res.render('register', { errorRegister, infoUser: req.body, regSuccess: null });
 
             // trước khi tạo ra ngày sinh cho user cần định dạng đoạn string khởi tạo ngày đúng chuẩn
             let birthdayOfUser = new Date(USER.validStrBirthday(birthdayDate, birthdayMonth, birthdayYear));
@@ -53,11 +52,10 @@ router.route('/login')
             const { email, password } = req.body;
             
             let errorLogin = null;
-            let infoUser = { email, password };
 
             errorLogin = await USER.checkAllErrorLogin(email, password);
             if(errorLogin) {
-                res.render('login', { errorLogin, infoUser });
+                res.render('login', { errorLogin, infoUser: req.body });
             }
 
             res.redirect(`/user/${email}`);
