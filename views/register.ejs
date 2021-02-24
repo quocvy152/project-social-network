@@ -59,29 +59,11 @@
                                     <span>Sign Up now and meet the awesome friends around the world.</span>
                                 </div>
                                 <form class="we-form" method="POST" action="/user/register">
-                                    <input id="username" name="username" type="username" placeholder="Username" <% if(infoUser.username) { %>
-                                        value="<%= infoUser.username %>"
-                                            <% } %>
-                                                >
-                                    <input id="email" name="email" type="email" placeholder="Email" <% if(infoUser.email) { %>
-                                    value=<%= infoUser.email %>
-                                        <% } %>
-                                            >
-                                    <input id="password" name="password" type="password" placeholder="Password"
-                                        <% if(infoUser.password) { %>
-                                    value=<%= infoUser.password %>
-                                        <% } %>
-                                            >
-                                    <input id="confirmPass" name="confirmPass" type="password"
-                                        placeholder="Confirm password" <% if(infoUser.confirmPass) { %>
-                                    value=<%= infoUser.confirmPass %>
-                                        <% } %>
-                                            >
-                                    <input id="phone" name="phone" type="text"
-                                        placeholder="+1234-567-987" <% if(infoUser.phone) { %>
-                                    value=<%= infoUser.phone %>
-                                        <% } %>
-                                            >
+                                    <input id="username" name="username" type="username" placeholder="Username" <%= infoUser.username %> ? value="<%= infoUser.username %>" : value=" " %>>
+                                    <input id="email" name="email" type="email" placeholder="Email" <%= infoUser.email %> ? value="<%= infoUser.email %>" : value=" " %>>
+                                    <input id="password" name="password" type="password" placeholder="Password" <%= infoUser.password %> ? value="<%= infoUser.password %>" : value=" " %>>
+                                    <input id="confirmPass" name="confirmPass" type="password" placeholder="Confirm Password" <% infoUser.password %> ? value="<%= infoUser.confirmPass %>" : value=" " %>>
+                                    <input id="phone" name="phone" type="text" placeholder="Phone" <%= infoUser.phone %> ? value="<%= infoUser.phone %>" : value=" " %>>
                                             <div class="_58mq _5dbb" id="birthday_wrapper">
                                                 <div class="mtm mbs _2_68">Ngày sinh<a class="_58ms mlm"
                                                         id="birthday-help" href="#"

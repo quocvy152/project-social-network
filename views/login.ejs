@@ -79,16 +79,8 @@
                                     <span>sign in now and meet the awesome Friends around the world.</span>
                                 </div>
                                 <form class="we-form" method="POST" action="/user/login">
-                                    <input id="email" name="email" type="email" placeholder="Email"
-                                        <% if(infoUser.email) { %>
-                                            value=<%= infoUser.email %> 
-                                        <% } %>
-                                    >
-                                    <input id="password" name="password" type="password" placeholder="Password"
-                                        <% if(infoUser.password) { %>
-                                            value=<%= infoUser.password %> 
-                                        <% } %>
-                                    >
+                                    <input id="email" name="email" type="email" placeholder="Email" <%= infoUser.email %> ? value="<%= infoUser.email %>" : value=" " %>>
+                                    <input id="password" name="password" type="password" placeholder="Password" <%= infoUser.password %> ? value="<%= infoUser.password %>" : value=" " %>>
                                     <input type="checkbox"><label>remember me</label>
                                     <button type="submit" data-ripple="">sign in</button>
                                     <% if(errorLogin) { %>
