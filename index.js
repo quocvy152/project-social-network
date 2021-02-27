@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const URI_MONGOOSE = 'mongodb://localhost:27017/project-mxh';
 
 const { USER_ROUTE } = require('./routes/user');
-const { USER_COLL } = require('./models/user-coll');
+const { USER_COLL } = require('./database/user-coll');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 

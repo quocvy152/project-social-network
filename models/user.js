@@ -1,4 +1,4 @@
-const { USER_COLL } = require('../models/user-coll');
+const { USER_COLL } = require('../database/user-coll');
 
 const { compare } = require('bcrypt');
   

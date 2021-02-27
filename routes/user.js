@@ -1,7 +1,7 @@
 const express = require('express');
 const { hash, compare }  = require('bcrypt');
 
-const { USER_COLL } = require('../models/user-coll');
+const { USER_COLL } = require('../database/user-coll');
 const { USER }      = require('../models/user');
 
 const router = express.Router();
