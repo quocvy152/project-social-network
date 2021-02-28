@@ -50,7 +50,7 @@ router.route('/login')
     .post(async (req, res) => {
         try {
             const { email, password } = req.body;
-            
+
             let errorLogin = null;
 
             errorLogin = await USER.checkAllErrorLogin(email, password);
@@ -58,6 +58,8 @@ router.route('/login')
                 res.render('login', { errorLogin, infoUser: req.body });
             }
 
+            req.session.email = email;
+            
             res.redirect(`/user/${email}`);
         } catch (error) {
             return res.json({ error: true, message: error.message });
