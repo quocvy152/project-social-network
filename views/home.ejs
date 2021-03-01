@@ -260,7 +260,7 @@
 			<div class="top-search">
 				<form method="post" class="">
 					<input type="text" placeholder="Search People, Pages, Groups etc">
-					<button data-ripple><i class="ti-search"></i></button>
+					<button data-ripple><i class="fa fa-search"></i></button>
 				</form>
 			</div>
 			<div class="page-name">
@@ -777,12 +777,11 @@
 					</ul>
 					<span class="seting-title">User setting <a href="#" title="">see all</a></span>
 					<ul class="log-out">
-						<!-- Đưa đường dẫn về trang cá nhân khi đang ở trang home -->>
-						<li><a href=<%= `/user/${infoUser.email}` %> title=""><i class="ti-user"></i> view profile</a></li>
-						<li><a href="setting.html" title=""><i class="ti-pencil-alt"></i>edit profile</a></li>
-						<li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>
-						<li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>
-						<li><a href="logout.html" title=""><i class="ti-power-off"></i>log out</a></li>
+						<li><a href="/user" title=""><i class="ti-user"></i> view profile</a></li>
+						<li><a href="setting.html" title=""><i class="fa fa-pencil"></i>edit profile</a></li>
+						<li><a href="#" title=""><i class="fa fa-target"></i>activity log</a></li>
+						<li><a href="setting.html" title=""><i class="fa fa-settings"></i>account setting</a></li>
+						<li><a href="/logout/clear-session" title=""><i class="fa fa-sign-out"></i>log out</a></li>
 					</ul>
 				</div>
 			</div>

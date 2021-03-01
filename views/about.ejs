@@ -262,7 +262,7 @@
 			    <span>About</span>
 			 </div>
 			<ul class="setting-area">
-				<li><a href="newsfeed.html" title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
+				<li><a href=`/home/${infoUser.email}` title="Home" data-ripple=""><i class="fa fa-home"></i></a></li>
 				<li>
 					<a href="#" title="Friend Requests" data-ripple="">
 						<i class="fa fa-user"></i><em class="bg-red">5</em>
@@ -772,11 +772,11 @@
 					</ul>
 					<span class="seting-title">User setting <a href="#" title="">see all</a></span>
 					<ul class="log-out">
-						<li><a href="about.html" title=""><i class="ti-user"></i> view profile</a></li>
+						<li><a href="/user" title=""><i class="ti-user"></i> view profile</a></li>
 						<li><a href="setting.html" title=""><i class="ti-pencil-alt"></i>edit profile</a></li>
 						<li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>
 						<li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>
-						<li><a href="/logout/<%= infoUser.email %>" title=""><i class="fa fa-sign-out"></i>log out</a></li>
+						<li><a href="/logout/clear-session" title=""><i class="fa fa-sign-out"></i>log out</a></li>
 					</ul>
 				</div>
 			</div>
@@ -1114,7 +1114,7 @@
 		<div class="left-menu-full">
 			<ul class="menu-slide">
 				<li><a class="closd-f-menu" href="#" title=""><i class="fa fa-arrow-circle-left"></i> close Menu</a></li>
-				<li class="menu-item-has-children"><a class="" href="#" title=""><i class="fa fa-home"></i> Home Pages</a>
+				<li class="menu-item-has-children"><a class="" href=`/home/${infoUser.email}` title=""><i class="fa fa-home"></i> Home Pages</a>
 					<ul class="submenu">
 						<li><a href="index.html" title="">Pitnik Default</a></li>
 						<li><a href="company-landing.html" title="">Company Landing</a></li>

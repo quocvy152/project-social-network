@@ -49,14 +49,25 @@ app.get('/home/:email', async (req, res) => {
     res.render('home', { infoUser });
 });
 
-app.get('/logout/:email', async (req, res) => {
-    let { email } = req.params;
+app.get('/logout/clear-session', async (req, res) => {
+    try {
+        let { email } = req.session;
 
-    let infoUser = await USER_COLL.findOne({ email });
-    if(!infoUser) res.json({ error: true, message: "CANNOT_FIND_USER" });
+        if(!email) res.redirect('/user/login');
 
-    res.render('logout', { infoUser });
+        req.session.destroy((err) => {
+            if(err){
+               console.log(err);
+            }else{
+                res.redirect('/user/login');
+            }
+        });
+    } catch (error) {
+        return res.json({ error: true, message: error.message });
+    }
 });
+
+
 
 mongoose.connect(URI_MONGOOSE, { 
     useNewUrlParser: true, 

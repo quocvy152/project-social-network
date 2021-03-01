@@ -50,7 +50,7 @@ router.route('/login')
     .post(async (req, res) => {
         try {
             const { email, password } = req.body;
-
+            
             let errorLogin = null;
 
             errorLogin = await USER.checkAllErrorLogin(email, password);
@@ -60,16 +60,18 @@ router.route('/login')
 
             req.session.email = email;
             
-            res.redirect(`/user/${email}`);
+            res.redirect(`/user`);
         } catch (error) {
             return res.json({ error: true, message: error.message });
         }
     })
 
-router.route('/:email')
+router.route('/')
     .get(async (req, res) => {
         try {
-            const { email } = req.params;
+            const { email } = req.session;
+
+            if(!email) res.redirect('/user/login');
 
             let infoUser = await USER_COLL.findOne({ email });
             if(!infoUser) res.json({ error: true, message: 'CANNOT_FIND_USER' });
