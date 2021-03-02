@@ -3,7 +3,7 @@ function checkSession(req, res, next) {
     if(!req.session.email && !(req.path == '/user/login') && !(req.path.toString() == '/user/register') && !(req.path == '/logout')) {
         res.redirect('/user/login');
     } else if(req.session.email && ((req.path == '/user/login') || (req.path.toString() == '/user/register'))){
-        res.redirect(`/home/${req.session.email}`);
+        res.redirect('/home');
     } else {
         next();
     }
