@@ -9,7 +9,10 @@
 	<title>Pitnik Social Network Toolkit</title>
     <link rel="icon" href="../images/fav.png" type="image/png" sizes="16x16"> 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
+	<!-- Inline CSS based on choices in "Settings" tab -->
+	<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
     <link rel="stylesheet" href="../css/main.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/color.css">
@@ -405,7 +408,11 @@
 										<i>Sunday</i>
 										<figure>
 											<span>"Celebrity looks Beautiful in that outfit! We should see each"</span>
-											<img src="../images/resources/admin.jpg" alt="">
+											<% if(infoUser.avatar) { %>
+												<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
+											<% } else { %>
+												<img alt="author" src="../images/male.png">
+											<% } %>
 										</figure>
 									</div>
 								</a>
@@ -763,7 +770,11 @@
 			</ul>
 			<div class="user-img">
 				<h5><%= infoUser.username %></h5>
-				<img src="../images/resources/admin.jpg" alt="">
+				<% if(infoUser.avatar) { %>
+					<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
+				<% } else { %>
+					<img alt="author" src="../images/male.png">
+				<% } %>
 				<span class="status f-online"></span>
 				<div class="user-setting">
 					<span class="seting-title">Chat setting <a href="#" title="">see all</a></span>
@@ -774,10 +785,10 @@
 					</ul>
 					<span class="seting-title">User setting <a href="#" title="">see all</a></span>
 					<ul class="log-out">
-						<li><a href="/user" title=""><i class="ti-user"></i> view profile</a></li>
-						<li><a href="setting.html" title=""><i class="ti-pencil-alt"></i>edit profile</a></li>
-						<li><a href="#" title=""><i class="ti-target"></i>activity log</a></li>
-						<li><a href="setting.html" title=""><i class="ti-settings"></i>account setting</a></li>
+						<li><a href="/user" title=""><i class="fa fa-user"></i> view profile</a></li>
+						<li><a href="setting.html" title=""><i class="fa fa-pencil"></i>edit profile</a></li>
+						<li><a href="#" title=""><i class="fa fa-list-alt"></i>activity log</a></li>
+						<li><a href="setting.html" title=""><i class="fa fa-user"></i>account setting</a></li>
 						<li><a href="/logout/clear-session" title=""><i class="fa fa-sign-out"></i>log out</a></li>
 					</ul>
 				</div>
@@ -1250,7 +1261,6 @@
 									<div class="edit-pp">
 										<label class="fileContainer">
 											<i class="fa fa-camera"></i>
-											<input type="file">
 										</label>
 									</div>
 									<img src="../images/resources/profile-image.jpg" alt="">
@@ -1280,19 +1290,38 @@
 										<li><span>4.7/5</span></li>
 									</ol>
 								</figure>
-								
+								<div class="modal fade" id="popupUpdateAvt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+										<div class="modal-content">
+											<div id="btn-hide">
+												<i class="fa fa-times"></i>
+											</div>
+											<h2 class="titleAvt" style="text-align: center;">Update your avatar</h2>
+											<div class="modal-header">
+												<form method="POST" action="/user/profile" style="z-index: 999;" enctype="multipart/form-data">
+													<div class="form-group ">
+														<h3>Chose your avatar</h3>
+														<input type="file" name="avatar">
+													</div>
+													<button type="submit" id="btn-save" class="btn btn-primary">Save</button>
+												</form>
+											</div>
+										</div>
+									</div>
+								  </div>
 								<div class="profile-section">
 									<div class="row">
 										<div class="col-lg-2 col-md-3">
 											<div class="profile-author">
 												<div class="profile-author-thumb">
-													<img alt="author" src="../images/resources/author.jpg">
+													<% if(infoUser.avatar) { %>
+														<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
+													<% } else { %>
+														<img alt="author" src="../images/male.png">
+													<% } %>
 													<div class="edit-dp">
 														<label class="fileContainer">
 															<i class="fa fa-camera"></i>
-															<form action="user/profile" method="POST" enctype="multipart/form-data">
-																<input type="file" name="avatar" />
-															  </form>
 														</label>
 													</div>
 												</div>
@@ -1905,7 +1934,7 @@
 	
 	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../js/main.min.js"></script>
 	<script src="../js/script.js"></script>
-
+	<script src="../js/popup-update-avatar.js"></script>
 </body>	
 
 </html>

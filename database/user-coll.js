@@ -34,8 +34,9 @@ const userSchema = new Schema({
             ref: 'user'
         }
     ],
-    birthDay  : { type: Date, required: true },
-    createAt   : { type: Date, default: Date.now }
+    avatar   : String,
+    birthDay : { type: Date, required: true },
+    createAt : { type: Date, default: Date.now }
 });
 
 const User = mongoose.model('user', userSchema);

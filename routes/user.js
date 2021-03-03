@@ -1,10 +1,31 @@
 const express = require('express');
+
 const { hash, compare }  = require('bcrypt');
+
+const uploadMulter = require('../utils/uploadMulter');
 
 const { USER_COLL } = require('../database/user-coll');
 const { USER }      = require('../models/user');
 
 const router = express.Router();
+
+router.route('/')
+    .get(async (req, res) => {
+        try {
+            const { email } = req.session;
+
+            if(!email) res.redirect('/user/login');
+
+            let infoUser = await USER_COLL.findOne({ email });
+            if(!infoUser) res.json({ error: true, message: 'CANNOT_FIND_USER' });
+
+            res.render('about', {
+                infoUser
+            });
+        } catch (error) {
+            return res.json({ error: true, message: error.message });
+        }
+    })
 
 /**
  * Hai hàm checkAllErrorRegister và checkAllErrorLogin đều trả về String khi xảy ra lỗi
@@ -66,21 +87,20 @@ router.route('/login')
         }
     })
 
-router.route('/')
-    .get(async (req, res) => {
-        try {
-            const { email } = req.session;
+router.route('/profile')
+    .post(uploadMulter.single('avatar'), async (req, res) => {
+        const { email } = req.session; 
+        const { filename } = req.file;
 
+        try {
             if(!email) res.redirect('/user/login');
 
-            let infoUser = await USER_COLL.findOne({ email });
-            if(!infoUser) res.json({ error: true, message: 'CANNOT_FIND_USER' });
+            let infoUserUpdate = await USER_COLL.findOneAndUpdate({ email }, { avatar: filename }, { new: true });
+            if(!infoUserUpdate) res.json({ error: true, message: 'CANNOT_UPDATE_AVATAR' });
 
-            res.render('about', {
-                infoUser
-            });
+            res.render('about', { infoUser: infoUserUpdate });
         } catch (error) {
-            return res.json({ error: true, message: error.message });
+            res.json({ error: true, message: error.message });
         }
     })
 

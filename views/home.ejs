@@ -408,7 +408,7 @@
 										<i>Sunday</i>
 										<figure>
 											<span>"Celebrity looks Beautiful in that outfit! We should see each"</span>
-											<img src="../images/resources/admin.jpg" alt="">
+											<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
 										</figure>
 									</div>
 								</a>
@@ -766,7 +766,11 @@
 			</ul>
 			<div class="user-img">
 				<h5><%= infoUser.username %></h5>
-				<img src="../images/resources/admin.jpg" alt="">
+				<% if(infoUser.avatar) { %>
+					<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+				<% } else { %>
+					<img src="../images/male" alt="">
+				<% } %>
 				<span class="status f-online"></span>
 				<div class="user-setting">
 					<span class="seting-title">Chat setting <a href="#" title="">see all</a></span>
@@ -777,10 +781,10 @@
 					</ul>
 					<span class="seting-title">User setting <a href="#" title="">see all</a></span>
 					<ul class="log-out">
-						<li><a href="/user" title=""><i class="ti-user"></i> view profile</a></li>
+						<li><a href="/user" title=""><i class="fa fa-user"></i> view profile</a></li>
 						<li><a href="setting.html" title=""><i class="fa fa-pencil"></i>edit profile</a></li>
-						<li><a href="#" title=""><i class="fa fa-target"></i>activity log</a></li>
-						<li><a href="setting.html" title=""><i class="fa fa-settings"></i>account setting</a></li>
+						<li><a href="#" title=""><i class="fa fa-list-alt"></i>activity log</a></li>
+						<li><a href="setting.html" title=""><i class="fa fa-user"></i>account setting</a></li>
 						<li><a href="/logout/clear-session" title=""><i class="fa fa-sign-out"></i>log out</a></li>
 					</ul>
 				</div>
@@ -1487,7 +1491,11 @@
 									<span class="create-post">Create post</span>
 									<div class="new-postbox">
 										<figure>
-											<img src="../images/resources/admin.jpg" alt="">
+											<% if(infoUser.avatar) { %>
+												<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+											<% } else { %>
+												<img src="../images/male" alt="">
+											<% } %>
 										</figure>
 										<div class="newpst-input">
 											<form method="post">
@@ -1965,7 +1973,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="coment-area" style="">
+												<div class="coment-area">
 													<ul class="we-comet">
 														<li>
 															<div class="comet-avatar">
@@ -2127,7 +2135,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="coment-area" style="">
+												<div class="coment-area">
 													<ul class="we-comet">
 														<li>
 															<div class="comet-avatar">
@@ -2293,7 +2301,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="coment-area" style="">
+												<div class="coment-area">
 													<ul class="we-comet">
 														<li>
 															<div class="comet-avatar">
@@ -2451,7 +2459,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="coment-area" style="">
+												<div class="coment-area">
 													<ul class="we-comet">
 														<li>
 															<div class="comet-avatar">
@@ -2614,7 +2622,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="coment-area" style="">
+												<div class="coment-area">
 													<ul class="we-comet">
 														<li>
 															<div class="comet-avatar">
@@ -2786,7 +2794,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="coment-area" style="">
+												<div class="coment-area">
 													<ul class="we-comet">
 														<li>
 															<div class="comet-avatar">
@@ -3147,7 +3155,11 @@
 					<figure><img src="../images/resources/share-post.jpg" alt=""></figure>
 					<div class="friend-info">
 						<figure>
-							<img alt="" src="../images/resources/admin.jpg">
+							<% if(infoUser.avatar) { %>
+								<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+							<% } else { %>
+								<img src="../images/male" alt="">
+							<% } %>
 						</figure>
 						<div class="friend-name">
 							<ins><a title="" href="time-line.html">Jack Carter</a> share <a title="" href="#">link</a></ins>
