@@ -20,7 +20,7 @@ router.route('/')
             if(!infoUser) res.json({ error: true, message: 'CANNOT_FIND_USER' });
 
             res.render('about', {
-                infoUser
+                infoUser, updateAvtSuccess: undefined
             });
         } catch (error) {
             return res.json({ error: true, message: error.message });
@@ -36,7 +36,7 @@ router.route('/register')
     })
     .post(async (req, res) => {
         try {
-            const { email, password, confirmPass, username, phone, birthdayDate, birthdayMonth, birthdayYear } = req.body;
+            const { email, password, confirmPass, username, phone, birthdayDate, birthdayMonth, birthdayYear, gender } = req.body;
 
             // tạo một biến thông báo lỗi chung, kiểm tra và thông báo lỗi từ từ thông qua biến này (mỗi thời điểm chỉ thông báo 1 lỗi)
             let errorRegister = null;
@@ -51,7 +51,7 @@ router.route('/register')
 
             // trước khi tạo ra ngày sinh cho user cần định dạng đoạn string khởi tạo ngày đúng chuẩn
             let birthdayOfUser = new Date(USER.validStrBirthday(birthdayDate, birthdayMonth, birthdayYear));
-            let newUser = new USER_COLL({ email, password: passHash, username: USER.removeSpace(username), phone, birthDay: birthdayOfUser });
+            let newUser = new USER_COLL({ email, password: passHash, username: USER.removeSpace(username), phone, avatar: null, gender: parseInt(gender), birthDay: birthdayOfUser });
 
             let infoUserSave = await newUser.save(); 
             if(!infoUserSave) {
@@ -98,7 +98,7 @@ router.route('/profile')
             let infoUserUpdate = await USER_COLL.findOneAndUpdate({ email }, { avatar: filename }, { new: true });
             if(!infoUserUpdate) res.json({ error: true, message: 'CANNOT_UPDATE_AVATAR' });
 
-            res.render('about', { infoUser: infoUserUpdate });
+            res.render('about', { infoUser: infoUserUpdate, updateAvtSuccess: true });
         } catch (error) {
             res.json({ error: true, message: error.message });
         }

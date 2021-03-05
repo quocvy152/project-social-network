@@ -408,7 +408,13 @@
 										<i>Sunday</i>
 										<figure>
 											<span>"Celebrity looks Beautiful in that outfit! We should see each"</span>
-											<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+											<% if(infoUser.avatar) { %>
+												<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
+											<% } else { %>
+												<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+												<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+												<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
+											<% } %>
 										</figure>
 									</div>
 								</a>
@@ -767,9 +773,11 @@
 			<div class="user-img">
 				<h5><%= infoUser.username %></h5>
 				<% if(infoUser.avatar) { %>
-					<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+					<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
 				<% } else { %>
-					<img src="../images/male" alt="">
+					<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+					<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+					<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
 				<% } %>
 				<span class="status f-online"></span>
 				<div class="user-setting">
@@ -1492,9 +1500,11 @@
 									<div class="new-postbox">
 										<figure>
 											<% if(infoUser.avatar) { %>
-												<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+												<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
 											<% } else { %>
-												<img src="../images/male" alt="">
+												<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+												<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+												<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
 											<% } %>
 										</figure>
 										<div class="newpst-input">
@@ -3156,9 +3166,11 @@
 					<div class="friend-info">
 						<figure>
 							<% if(infoUser.avatar) { %>
-								<img src="../images/avatar/<%= infoUser.avatar %>" alt="">
+								<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
 							<% } else { %>
-								<img src="../images/male" alt="">
+								<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+								<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+								<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
 							<% } %>
 						</figure>
 						<div class="friend-name">

@@ -35,6 +35,8 @@ const userSchema = new Schema({
         }
     ],
     avatar   : String,
+    // trường giới tính qui định 1 là Male, 0 là Female, 2 là AnotherSex (giới tính Khác)
+    gender   : Number,
     birthDay : { type: Date, required: true },
     createAt : { type: Date, default: Date.now }
 });

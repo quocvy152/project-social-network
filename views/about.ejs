@@ -411,7 +411,9 @@
 											<% if(infoUser.avatar) { %>
 												<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
 											<% } else { %>
-												<img alt="author" src="../images/male.png">
+												<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+												<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+												<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
 											<% } %>
 										</figure>
 									</div>
@@ -773,7 +775,9 @@
 				<% if(infoUser.avatar) { %>
 					<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
 				<% } else { %>
-					<img alt="author" src="../images/male.png">
+					<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+					<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+					<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
 				<% } %>
 				<span class="status f-online"></span>
 				<div class="user-setting">
@@ -1249,10 +1253,17 @@
 			</ul>
 		</div>
 	</div><!-- left sidebar menu -->
-		
 	<section>
 		<div class="gap2 gray-bg">
 			<div class="container">
+				<% if(updateAvtSuccess) { %>
+					<div class="alert alert-success" id="notiUpdateSucc" style="z-index: 9999; font-size: 15px;" role="alert">
+						<div id="btn-hide-noti">
+							<i class="fa fa-times"></i>
+						</div>
+						Your avatar updated success !
+					</div>
+				<% } %>
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="row merged20" id="page-contents">
@@ -1317,7 +1328,9 @@
 													<% if(infoUser.avatar) { %>
 														<img alt="author" src="../images/avatar/<%= infoUser.avatar %>">
 													<% } else { %>
-														<img alt="author" src="../images/male.png">
+														<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+														<% let nameDefImgFollowSex = infoUser.gender === 1 ? 'default-avatar-male.jpg' : (infoUser.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+														<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
 													<% } %>
 													<div class="edit-dp">
 														<label class="fileContainer">
@@ -1406,7 +1419,7 @@
 										</p>
 										<span class="f-title"><i class="fa fa-male"></i> Gender:</span>
 										<p>
-											Male 
+											<%= infoUser.gender === 1 ? 'Male' : (infoUser.gender === 0 ? 'Female' : "Another") %>
 										</p>
 										<span class="f-title"><i class="fa fa-globe"></i> Country:</span>
 										<p>
