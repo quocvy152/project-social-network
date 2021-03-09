@@ -269,11 +269,17 @@
 					<span><a href="/home" title="Home" data-ripple=""><i class="fa fa-home"></i></a></span>
 				</li>
 				<li>
-					<a href="#" title="Friend Requests" data-ripple="">
-						<i class="fa fa-user"></i><em class="bg-red">5</em>
-					</a>
+					<% if(infoUser.friendRequests.length > 0) { %>
+						<a href="#" title="Friend Requests" data-ripple="">
+							<i class="fa fa-user"></i><em class="bg-red"><%= infoUser.friendRequests.length %></em>
+						</a>
+					<% } else { %>
+						<a href="#" title="Friend Requests" data-ripple="">
+							<i class="fa fa-user"></i><em></em>
+						</a>
+					<% } %>
 					<div class="dropdowns">
-						<span>5 New Requests <a href="#" title="">View all Requests</a></span>
+						<span>New Requests <a href="#" title="">View all Requests</a></span>
 						<ul class="drops-menu">
 							<li>
 								<div>
@@ -1301,10 +1307,11 @@
 										<li><span>4.7/5</span></li>
 									</ol>
 								</figure>
+								<!-- Dialog update avatar -->
 								<div class="modal fade" id="popupUpdateAvt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered" role="document">
 										<div class="modal-content">
-											<div id="btn-hide">
+											<div id="btn-hide" class="btn-hide">
 												<i class="fa fa-times"></i>
 											</div>
 											<h2 class="titleAvt" style="text-align: center;">Update your avatar</h2>
@@ -1378,8 +1385,8 @@
 											</ul>
 											<ol class="folw-detail">
 												<li><span>Posts</span><ins>101</ins></li>
-												<li><span>Followers</span><ins>1.3K</ins></li>
-												<li><span>Following</span><ins>22</ins></li>
+												<li><span>Friends</span><ins> <%= infoUser.friends.length %> </ins></li>
+												<li><span>Friend requests</span><ins><%= infoUser.friendRequests.length %></ins></li>
 											</ol>
 										</div>
 									</div>
@@ -1531,77 +1538,112 @@
 										</div>
 									</div>
 								</div>
+								<!---------------------- FRIEND LIST ------------------->
+								<!---------------------- FRIEND LIST ------------------->
 								<div class="central-meta">
-									<span class="create-post">Friend's (320) <a href="timeline-friends2.html" title="">See All</a></span>
+									<span class="create-post">Friend's (<%= infoUser.friends.length %>) <a href="timeline-friends2.html" title="">See All</a></span>
 									<ul class="frndz-list">
-										<li>
-											<img src="../images/resources/recent1.jpg" alt="">
-											<div class="sugtd-frnd-meta">
-												<a href="#" title="">Olivia</a>
-												<span>1 mutual friend</span>
-												<ul class="add-remove-frnd">
-													<li class="add-tofrndlist"><a class="send-mesg" href="#" title="Send Message"><i class="fa fa-commenting"></i></a></li>
-													<li class="remove-frnd"><a href="#" title="remove friend"><i class="fa fa-user-times"></i></a></li>
-												</ul>
-											</div>
-										</li>
-										<li>
-											<img src="../images/resources/recent2.jpg" alt="">
-											<div class="sugtd-frnd-meta">
-												<a href="#" title="">Emma watson</a>
-												<span>2 mutual friend</span>
-												<ul class="add-remove-frnd">
-													<li class="add-tofrndlist"><a class="send-mesg" href="#" title="Send Message"><i class="fa fa-commenting"></i></a></li>
-													<li class="remove-frnd"><a href="#" title="remove friend"><i class="fa fa-user-times"></i></a></li>
-												</ul>
-											</div>
-										</li>
-										<li>
-											<img src="../images/resources/recent3.jpg" alt="">
-											<div class="sugtd-frnd-meta">
-												<a href="#" title="">Isabella</a>
-												<span><a href="#" title="">Emmy</a> is mutual friend</span>
-												<ul class="add-remove-frnd">
-													<li class="add-tofrndlist"><a class="send-mesg" href="#" title="Send Message"><i class="fa fa-commenting"></i></a></li>
-													<li class="remove-frnd"><a href="#" title="remove friend"><i class="fa fa-user-times"></i></a></li>
-												</ul>
-											</div>
-										</li>
-										<li>
-											<img src="../images/resources/recent4.jpg" alt="">
-											<div class="sugtd-frnd-meta">
-												<a href="#" title="">Amelia</a>
-												<span>5 mutual friend</span>
-												<ul class="add-remove-frnd">
-													<li class="add-tofrndlist"><a class="send-mesg" href="#" title="Send Message"><i class="fa fa-commenting"></i></a></li>
-													<li class="remove-frnd"><a href="#" title="remove friend"><i class="fa fa-user-times"></i></a></li>
-												</ul>
-											</div>
-										</li>
-										<li>
-											<img src="../images/resources/recent5.jpg" alt="">
-											<div class="sugtd-frnd-meta">
-												<a href="#" title="">Sophia</a>
-												<span>1 mutual friend</span>
-												<ul class="add-remove-frnd">
-													<li class="add-tofrndlist"><a class="send-mesg" href="#" title="Send Message"><i class="fa fa-commenting"></i></a></li>
-													<li class="remove-frnd"><a href="#" title="remove friend"><i class="fa fa-user-times"></i></a></li>
-												</ul>
-											</div>
-										</li>
-										<li>
-											<img src="../images/resources/recent6.jpg" alt="">
-											<div class="sugtd-frnd-meta">
-												<a href="#" title="">Amelia</a>
-												<span>3 mutual friend</span>
-												<ul class="add-remove-frnd">
-													<li class="add-tofrndlist"><a class="send-mesg" href="#" title="Send Message"><i class="fa fa-commenting"></i></a></li>
-													<li class="remove-frnd"><a href="#" title="remove friend"><i class="fa fa-user-times"></i></a></li>
-												</ul>
-											</div>
-										</li>
+										<% infoUser.friends.forEach(friend => { %>
+											<li>
+												<% if(friend.avatar) { %>
+													<img alt="author" src="../images/avatar/<%= friend.avatar %>">
+												<% } else { %>
+													<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+													<% let nameDefImgFollowSex = friend.gender === 1 ? 'default-avatar-male.jpg' : (friend.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+													<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
+												<% } %>
+												<div class="sugtd-frnd-meta">
+													<a href="#" title=""><%= friend.username %></a>
+													<span>1 mutual friend</span>
+													<ul class="add-remove-frnd">
+														<li class="remove-frnd" ><a href="/user/unfriend/<%= friend._id %>"><i class="fa fa-user-times" title="Unfriend"></i></a></li>
+													</ul>
+												</div>
+											</li>
+										<% }); %>
 									</ul>
-								</div><!-- friends list -->
+								</div>
+								<!-------------------------- (Danh sách gợi ý kết bạn) ----------------------->
+								<!-------------------------- (Danh sách gợi ý kết bạn) ----------------------->
+								<div class="central-meta">
+									<span class="create-post">People you may know <a href="timeline-friends2.html" title="">See All</a></span>
+									<ul class="frndz-list">
+										<% listUser.forEach(user => { %>
+											<% let arrIdOfFriend = infoUser.friends.map(friend => friend._id); %>
+											<% let arrIdOfFriendReq = infoUser.friendRequests.map(friendReq => friendReq._id); %>
+											<% let arrIdOfGuestFriend = infoUser.guestFriends.map(guestFriend => guestFriend._id); %>
+											<% if(!arrIdOfFriend.includes(user._id) && !arrIdOfFriendReq.includes(user._id) && !arrIdOfGuestFriend.includes(user._id)) { %>
+												<li>
+													<% if(user.avatar) { %>
+														<img alt="author" src="../images/avatar/<%= user.avatar %>">
+													<% } else { %>
+														<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+														<% let nameDefImgFollowSex = user.gender === 1 ? 'default-avatar-male.jpg' : (user.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+														<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
+													<% } %>
+													<div class="sugtd-frnd-meta">
+														<a href="#" title=""><%= user.username %></a>
+														<span>1 mutual friend</span>
+														<ul class="add-remove-frnd">
+															<li class="add-tofrndlist"><a href="/user/add/<%= user._id %>" title="Add friend">Add Friend</a></li>
+														</ul>
+													</div>
+												</li>
+											<% } %>
+										<% }); %>
+									</ul>
+								</div>
+								<!-------------------------------- FRIEND REQUEST --------------------------->
+								<!-------------------------------- FRIEND REQUEST --------------------------->
+								<div class="central-meta">
+									<span class="create-post">Friend requests (<%= infoUser.friendRequests.length %>) <a href="timeline-friends2.html" title="">See All</a></span>
+									<ul class="frndz-list">
+										<% infoUser.friendRequests.forEach(request => { %>
+											<li>
+												<% if(request.avatar) { %>
+													<img alt="author" src="../images/avatar/<%= request.avatar %>">
+												<% } else { %>
+													<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+													<% let nameDefImgFollowSex = request.gender === 1 ? 'default-avatar-male.jpg' : (request.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+													<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
+												<% } %>
+												<div class="sugtd-frnd-meta">
+													<a href="#" title=""><%= request.username %></a>
+													<span>1 mutual friend</span>
+													<ul class="add-remove-frnd">
+														<li class="add-tofrndlist"><a href="/user/confirm/<%= request._id %>" title="Confirm">Confirm</a></li>
+														<li class="remove-frnd"><a href="/user/remove-request/<%= request._id %>" title="Remove request">Delete</i></a></li>
+													</ul>
+												</div>
+											</li>
+										<% }); %>
+									</ul>
+								</div>
+								<!-------------------------------- GUEST REQUEST --------------------------->
+								<!-------------------------------- GUEST REQUEST --------------------------->
+								<div class="central-meta">
+									<span class="create-post">Guest friends (<%= infoUser.guestFriends.length %>) <a href="timeline-friends2.html" title="">See All</a></span>
+									<ul class="frndz-list">
+										<% infoUser.guestFriends.forEach(guest => { %>
+											<li>
+												<% if(guest.avatar) { %>
+													<img alt="author" src="../images/avatar/<%= guest.avatar %>">
+												<% } else { %>
+													<!-- nameDefImgFollowSex xác định để Avatar mặc định theo giới tính -->
+													<% let nameDefImgFollowSex = guest.gender === 1 ? 'default-avatar-male.jpg' : (guest.gender === 0 ? 'default-avatar-female.jpg' : 'default-avatar-another-gender.jpg') %>
+													<img alt="author" src="../images/<%= nameDefImgFollowSex %>">
+												<% } %>
+												<div class="sugtd-frnd-meta">
+													<a href="#" title=""><%= guest.username %></a>
+													<span>1 mutual friend</span>
+													<ul class="add-remove-frnd">
+														<li class="remove-frnd"><a href="/user/cancel-request/<%= guest._id %>" title="Undo">Cancel Request</i></a></li>
+													</ul>
+												</div>
+											</li>
+										<% }); %>
+									</ul>
+								</div>
 								<div class="central-meta">
 									<span class="create-post">Photos (580) <a href="timeline-photos.html" title="">See All</a></span>
 									<ul class="photos-list">

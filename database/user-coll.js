@@ -17,7 +17,7 @@ const userSchema = new Schema({
         }
     ],
     /**
-     * Danh sách những người dùng gửi kết bạn với User
+     * Danh sách những người dùng User đã gửi kết bạn cho họ
      */
     guestFriends: [
         {
@@ -26,9 +26,9 @@ const userSchema = new Schema({
         }
     ],
     /**
-     * Danh sách người dùng User gửi kết bạn
+     * Danh sách những người gửi kết bạn với User
      */
-    friendsRequest: [
+    friendRequests: [
         {
             type: Schema.Types.ObjectId,
             ref: 'user'
